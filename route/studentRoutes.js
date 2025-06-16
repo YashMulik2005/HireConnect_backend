@@ -25,7 +25,7 @@ router.post("/addskills", verifyToken, addSkills);
 
 router.post("/addEducation", verifyToken, addEducation);
 router.delete("/deleteEducation/:id", verifyToken, deleteEduction);
-router.put("/updateEducation/:id", verifyToken, updateEducation); // changed to PUT
+router.put("/updateEducation/:id", verifyToken, updateEducation);
 
 router.post("/addProject", verifyToken, addProject);
 router.put("/updateProject/:id", verifyToken, updateProject);
