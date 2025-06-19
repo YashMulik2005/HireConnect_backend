@@ -41,7 +41,7 @@ const login = async (req, res) => {
   try {
     const { mail, password } = req.body;
 
-    const student = await studentModel.findOne({ mail });
+    let student = await studentModel.findOne({ mail });
 
     if (!student) {
       return notFoundResponse(res, "User not found.");
@@ -57,11 +57,20 @@ const login = async (req, res) => {
       mail: student.mail,
       name: student.name,
       address: student.address,
+      type: "student",
     };
+
+    student.type = "student";
 
     const token = await jwt.sign(payload, process.env.jwt_secret);
 
-    return sucessResponse(res, "login sucessfull.", token);
+    // return sucessResponse(res, "login sucessfull.", token);
+    return res.status(200).json({
+      status: true,
+      message: "Login sucessfull",
+      data: payload,
+      token: token,
+    });
   } catch (err) {
     return errorResponse(res, err);
   }
