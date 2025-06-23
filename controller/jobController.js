@@ -80,7 +80,7 @@ const updateJob = async (req, res) => {
     job.reg_date = reg_date || job.reg_date;
 
     await job.save();
-    return sucessResponse(res, "Job updated successfully.", job);
+    return sucessResponse(res, job, "Job updated successfully.");
   } catch (err) {
     return errorResponse(res, err);
   }

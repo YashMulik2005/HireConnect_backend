@@ -89,7 +89,7 @@ const updateAddress = async (req, res) => {
     company.address = address;
     await company.save();
 
-    return sucessResponse(res, "address updated sucessfully.", company);
+    return sucessResponse(res, company, "address updated sucessfully.");
   } catch (err) {}
 };
 
@@ -109,7 +109,7 @@ const updateProfile = async (req, res) => {
     company.address = address || company.address;
 
     await company.save();
-    return sucessResponse(res, "Profile updated successfully.", company);
+    return sucessResponse(res, company, "Profile updated successfully.");
   } catch (err) {
     return errorResponse(res, err);
   }
@@ -127,7 +127,7 @@ const updateStatus = async (req, res) => {
     company.status = status;
     company.save();
 
-    return sucessResponse(res, "status updated successfully.", company);
+    return sucessResponse(res, company, "status updated successfully.");
   } catch (err) {
     return errorResponse(res, err);
   }

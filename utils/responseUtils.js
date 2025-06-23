@@ -1,8 +1,8 @@
-const sucessResponse = (res, message, data) => {
+const sucessResponse = (res, data, message = "data fetched successfully") => {
   return res.status(200).json({
     status: true,
-    message: message || "data fetched was successfully",
-    data: data,
+    message,
+    data,
   });
 };
 

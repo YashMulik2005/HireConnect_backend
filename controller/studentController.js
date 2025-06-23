@@ -88,7 +88,7 @@ const addSkills = async (req, res) => {
     student.skills = skills;
     await student.save();
 
-    return sucessResponse(res, "skills added sucessfully", student);
+    return sucessResponse(res, student, "skills added sucessfully");
   } catch (err) {
     return errorResponse(res, err);
   }
@@ -170,10 +170,11 @@ const updateEducation = async (req, res) => {
 
     await student.save();
 
-    return sucessResponse(res, {
-      message: "Education entry updated successfully.",
-      education: student,
-    });
+    return sucessResponse(
+      res,
+      student,
+      "Education entry updated successfully."
+    );
   } catch (err) {
     return errorResponse(res, err);
   }
@@ -191,10 +192,7 @@ const addProject = async (req, res) => {
     student.projects.push(project);
     await student.save();
 
-    return sucessResponse(res, {
-      message: "Project added successfully.",
-      projects: student.projects,
-    });
+    return sucessResponse(res, student.projects, "Project added successfully.");
   } catch (err) {
     return errorResponse(res, err.message);
   }
@@ -220,10 +218,11 @@ const updateProject = async (req, res) => {
 
     await student.save();
 
-    return sucessResponse(res, {
-      message: "Project updated successfully.",
-      projects: student.projects,
-    });
+    return sucessResponse(
+      res,
+      student.projects,
+      "Project updated successfully."
+    );
   } catch (err) {
     return errorResponse(res, err.message);
   }
@@ -245,10 +244,11 @@ const deleteProject = async (req, res) => {
 
     await student.save();
 
-    return sucessResponse(res, {
-      message: "Project deleted successfully.",
-      projects: student.projects,
-    });
+    return sucessResponse(
+      res,
+      student.projects,
+      "Project deleted successfully."
+    );
   } catch (err) {
     return errorResponse(res, err.message);
   }
@@ -266,10 +266,11 @@ const addExperience = async (req, res) => {
     student.experience.push(experience);
     await student.save();
 
-    return sucessResponse(res, {
-      message: "Experience added successfully.",
-      experience: student.experience,
-    });
+    return sucessResponse(
+      res,
+      student.experience,
+      "Experience added successfully."
+    );
   } catch (err) {
     return errorResponse(res, err.message);
   }
@@ -295,10 +296,11 @@ const updateExperience = async (req, res) => {
 
     await student.save();
 
-    return sucessResponse(res, {
-      message: "Experience updated successfully.",
-      experience: student.experience,
-    });
+    return sucessResponse(
+      res,
+      student.experience,
+      "Experience updated successfully."
+    );
   } catch (err) {
     return errorResponse(res, err.message);
   }
@@ -322,10 +324,11 @@ const deleteExperience = async (req, res) => {
 
     await student.save();
 
-    return sucessResponse(res, {
-      message: "Experience deleted successfully.",
-      experience: student.experience,
-    });
+    return sucessResponse(
+      res,
+      student.experience,
+      "Experience deleted successfully."
+    );
   } catch (err) {
     return errorResponse(res, err.message);
   }
