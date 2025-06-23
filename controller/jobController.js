@@ -16,6 +16,12 @@ const createJob = async (req, res) => {
       job_type,
       address,
       reg_date,
+      category,
+      salary,
+      job_mode,
+      perks,
+      numberOfOpenings,
+      responsibilities,
     } = req.body;
 
     const companyId = req.user.id;
@@ -29,6 +35,12 @@ const createJob = async (req, res) => {
       address,
       company: companyId,
       reg_date: reg_date,
+      category,
+      salary,
+      job_mode,
+      perks,
+      numberOfOpenings,
+      responsibilities,
     });
 
     await newJob.save();
@@ -76,7 +88,10 @@ const updateJob = async (req, res) => {
 
 const getJobs = async (req, res) => {
   try {
-    const jobs = await JobModel.find({});
+    const jobs = await JobModel.find({})
+      .select("title description salary required_skills job_mode reg_date")
+      .populate("company", "name address");
+
     return sucessResponse(res, jobs);
   } catch (err) {
     return errorResponse(res, err);

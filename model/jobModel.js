@@ -49,6 +49,18 @@ const jobSchema = new mongoose.Schema(
       enum: ["full-time", "part-time", "internship", "freelance", "contract"],
       required: true,
     },
+    perks: {
+      type: [String],
+      required: true,
+    },
+    numberOfOpenings: {
+      type: Number,
+      required: true,
+    },
+    responsibilities: {
+      type: [String],
+      required: true,
+    },
   },
   { timestamps: true }
 );
