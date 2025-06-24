@@ -133,4 +133,27 @@ const updateStatus = async (req, res) => {
   }
 };
 
-module.exports = { login, signUp, updateAddress, updateProfile, updateStatus };
+const updateLogo = async (req, res) => {
+  try {
+    const { logo_url } = req.body;
+    const company = await CompanyModel.findById(req.user.id);
+    if (!company) {
+      return notFoundResponse(res, "Company not found.");
+    }
+
+    company.logo_url = logo_url;
+    await company.save();
+    return sucessResponse(res, company, "Profile updated successfully.");
+  } catch (err) {
+    return errorResponse(res, err);
+  }
+};
+
+module.exports = {
+  login,
+  signUp,
+  updateAddress,
+  updateProfile,
+  updateStatus,
+  updateLogo,
+};

@@ -26,6 +26,9 @@ const companyScheam = new mongoose.Schema({
   address: {
     type: Object,
   },
+  logo_url: {
+    type: String,
+  },
 });
 
 const CompanyModel = mongoose.model("Company", companyScheam);
