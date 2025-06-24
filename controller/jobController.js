@@ -90,7 +90,7 @@ const getJobs = async (req, res) => {
   try {
     const jobs = await JobModel.find({})
       .select("title description salary required_skills job_mode reg_date")
-      .populate("company", "name address");
+      .populate("company", "name address logo_url");
 
     return sucessResponse(res, jobs);
   } catch (err) {
