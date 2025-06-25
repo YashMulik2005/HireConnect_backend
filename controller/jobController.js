@@ -134,7 +134,7 @@ const getJobs = async (req, res) => {
 const getJobsById = async (req, res) => {
   try {
     const { id } = req.params;
-    const jobs = await JobModel.findById(id);
+    const jobs = await JobModel.findById(id).populate("company");
     return sucessResponse(res, jobs);
   } catch (err) {
     return errorResponse(res, err);

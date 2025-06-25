@@ -73,6 +73,9 @@ const studentSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  mobile_no: {
+    type: Number,
+  },
 });
 
 const StudentModel = mongoose.model("Student", studentSchema);

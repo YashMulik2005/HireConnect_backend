@@ -9,7 +9,17 @@ const {
 const apply = async (req, res) => {
   try {
     const studentId = req.user.id;
-    const { job_id, resume, cover_letter } = req.body;
+    const {
+      job_id,
+      resume,
+      cover_letter,
+      skills,
+      education,
+      projects,
+      github_url,
+      linkedin_url,
+      experience,
+    } = req.body;
 
     const job = await JobModel.findById(job_id);
     if (!job) {
@@ -36,6 +46,12 @@ const apply = async (req, res) => {
       resume,
       cover_letter,
       status: "Under review",
+      skills,
+      education,
+      projects,
+      github_url,
+      linkedin_url,
+      experience,
     });
 
     await newApplication.save();
