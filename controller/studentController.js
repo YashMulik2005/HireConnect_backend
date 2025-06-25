@@ -334,6 +334,18 @@ const deleteExperience = async (req, res) => {
   }
 };
 
+const getStudentDetails = async (req, res) => {
+  try {
+    const user_id = req.user.id;
+
+    const student = await studentModel.findById(user_id);
+
+    return sucessResponse(res, student);
+  } catch (err) {
+    return errorResponse(res, err.message);
+  }
+};
+
 module.exports = {
   signup,
   login,
@@ -347,4 +359,5 @@ module.exports = {
   addExperience,
   updateExperience,
   deleteExperience,
+  getStudentDetails,
 };

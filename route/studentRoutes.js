@@ -14,12 +14,14 @@ const {
   addExperience,
   updateExperience,
   deleteExperience,
+  getStudentDetails,
 } = require("../controller/studentController");
 
 const { verifyToken } = require("../utils/AuthUtils");
 
 router.post("/signUp", signup);
 router.post("/login", login);
+router.get("/", verifyToken, getStudentDetails);
 
 router.post("/addskills", verifyToken, addSkills);
 
