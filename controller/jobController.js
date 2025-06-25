@@ -88,9 +88,42 @@ const updateJob = async (req, res) => {
 
 const getJobs = async (req, res) => {
   try {
-    const jobs = await JobModel.find({})
+    const {
+      job_type,
+      categories,
+      min_salary,
+      max_salary,
+      experience,
+      job_modes,
+    } = req.query;
+
+    const filter = {};
+
+    if (job_type) {
+      filter.job_type = { $in: job_type.split(",") };
+    }
+
+    if (categories) {
+      filter.category = { $in: categories.split(",") };
+    }
+
+    if (min_salary || max_salary) {
+      filter.salary = {};
+      if (min_salary) filter.salary.$gte = parseInt(min_salary);
+      if (max_salary) filter.salary.$lte = parseInt(max_salary);
+    }
+
+    if (experience) {
+      filter.required_experience = { $in: experience.split(",") };
+    }
+
+    if (job_modes) {
+      filter.job_mode = { $in: job_modes.split(",") };
+    }
+
+    const jobs = await JobModel.find(filter)
       .select("title description salary required_skills job_mode reg_date")
-      .populate("company", "name address logo_url");
+      .populate("company", "name address");
 
     return sucessResponse(res, jobs);
   } catch (err) {
