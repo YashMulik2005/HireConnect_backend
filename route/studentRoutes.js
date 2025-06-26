@@ -15,6 +15,8 @@ const {
   updateExperience,
   deleteExperience,
   getStudentDetails,
+  addGithubUrl,
+  addLinkedinUrl,
 } = require("../controller/studentController");
 
 const { verifyToken } = require("../utils/AuthUtils");
@@ -36,5 +38,8 @@ router.delete("/deleteProject/:id", verifyToken, deleteProject);
 router.post("/addExperience", verifyToken, addExperience);
 router.put("/updateExperience/:id", verifyToken, updateExperience);
 router.delete("/deleteExperience/:id", verifyToken, deleteExperience);
+
+router.post("/addGithub", verifyToken, addGithubUrl);
+router.post("/addLinkedin", verifyToken, addLinkedinUrl);
 
 module.exports = router;

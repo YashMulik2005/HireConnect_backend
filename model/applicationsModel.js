@@ -1,30 +1,30 @@
 const mongoose = require("mongoose");
 
-const educationSchema = new mongoose.Schema({
-  institution: { type: String, required: true },
-  degree: { type: String, required: true },
-  field: { type: String },
-  startYear: { type: Number },
-  endYear: { type: Number },
-  grade: { type: String },
-});
+// const educationSchema = new mongoose.Schema({
+//   institution: { type: String, required: true },
+//   degree: { type: String, required: true },
+//   field: { type: String },
+//   startYear: { type: Number },
+//   endYear: { type: Number },
+//   grade: { type: String },
+// });
 
-const projectSchema = new mongoose.Schema({
-  title: { type: String, required: true },
-  description: { type: String },
-  startDate: { type: String },
-  endDate: { type: String },
-  githubLink: { type: String },
-  liveLink: { type: String },
-});
+// const projectSchema = new mongoose.Schema({
+//   title: { type: String, required: true },
+//   description: { type: String },
+//   startDate: { type: String },
+//   endDate: { type: String },
+//   githubLink: { type: String },
+//   liveLink: { type: String },
+// });
 
-const experienceSchema = new mongoose.Schema({
-  company: { type: String, required: true },
-  position: { type: String, required: true },
-  startDate: { type: String },
-  endDate: { type: String },
-  description: { type: String },
-});
+// const experienceSchema = new mongoose.Schema({
+//   company: { type: String, required: true },
+//   position: { type: String, required: true },
+//   startDate: { type: String },
+//   endDate: { type: String },
+//   description: { type: String },
+// });
 
 const applicationsSchema = new mongoose.Schema({
   student_id: {
@@ -61,11 +61,11 @@ const applicationsSchema = new mongoose.Schema({
     default: [],
   },
   education: {
-    type: [educationSchema],
+    type: [Object],
     default: [],
   },
   projects: {
-    type: [projectSchema],
+    type: [Object],
     default: [],
   },
   github_url: {
@@ -75,8 +75,20 @@ const applicationsSchema = new mongoose.Schema({
     type: String,
   },
   experience: {
-    type: [experienceSchema],
+    type: [Object],
     default: [],
+  },
+  name: {
+    type: String,
+    required: true,
+  },
+  mail: {
+    type: String,
+    required: true,
+  },
+  mobile_no: {
+    type: String,
+    required: true,
   },
 });
 

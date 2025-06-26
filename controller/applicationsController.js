@@ -19,6 +19,9 @@ const apply = async (req, res) => {
       github_url,
       linkedin_url,
       experience,
+      name,
+      mail,
+      mobile_no,
     } = req.body;
 
     const job = await JobModel.findById(job_id);
@@ -52,6 +55,9 @@ const apply = async (req, res) => {
       github_url,
       linkedin_url,
       experience,
+      name,
+      mobile_no,
+      mail,
     });
 
     await newApplication.save();

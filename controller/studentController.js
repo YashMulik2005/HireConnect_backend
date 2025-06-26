@@ -346,6 +346,46 @@ const getStudentDetails = async (req, res) => {
   }
 };
 
+const addGithubUrl = async (req, res) => {
+  try {
+    const { github_url } = req.body;
+
+    if (!github_url) return errorResponse(res, "link data is required.");
+
+    const student = await studentModel.findById(req.user.id);
+    if (!student) return notFoundResponse(res, "Student not found.");
+
+    student.github_url = github_url;
+    await student.save();
+
+    return sucessResponse(res, student.github_url, "link added successfully.");
+  } catch (err) {
+    return errorResponse(res, err.message);
+  }
+};
+
+const addLinkedinUrl = async (req, res) => {
+  try {
+    const { linkedin_url } = req.body;
+
+    if (!linkedin_url) return errorResponse(res, "link data is required.");
+
+    const student = await studentModel.findById(req.user.id);
+    if (!student) return notFoundResponse(res, "Student not found.");
+
+    student.linkedin_url = linkedin_url;
+    await student.save();
+
+    return sucessResponse(
+      res,
+      student.linkedin_url,
+      "link added successfully."
+    );
+  } catch (err) {
+    return errorResponse(res, err.message);
+  }
+};
+
 module.exports = {
   signup,
   login,
@@ -360,4 +400,6 @@ module.exports = {
   updateExperience,
   deleteExperience,
   getStudentDetails,
+  addGithubUrl,
+  addLinkedinUrl,
 };

@@ -26,57 +26,60 @@ const experienceSchema = new mongoose.Schema({
   description: { type: String },
 });
 
-const studentSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
+const studentSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+    },
+    mail: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
+    skills: {
+      type: [String],
+      default: [],
+    },
+    resume: {
+      type: String,
+    },
+    address: {
+      type: Object,
+      required: true,
+    },
+    education: {
+      type: [educationSchema],
+      default: [],
+    },
+    projects: {
+      type: [projectSchema],
+      default: [],
+    },
+    github_url: {
+      type: String,
+    },
+    linkedin_url: {
+      type: String,
+    },
+    experience: {
+      type: [experienceSchema],
+      default: [],
+    },
+    is_completed: {
+      type: Boolean,
+      default: false,
+    },
+    mobile_no: {
+      type: Number,
+    },
   },
-  mail: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  password: {
-    type: String,
-    required: true,
-  },
-  skills: {
-    type: [String],
-    default: [],
-  },
-  resume: {
-    type: String,
-  },
-  address: {
-    type: Object,
-    required: true,
-  },
-  education: {
-    type: [educationSchema],
-    default: [],
-  },
-  projects: {
-    type: [projectSchema],
-    default: [],
-  },
-  github_url: {
-    type: String,
-  },
-  linkedin_url: {
-    type: String,
-  },
-  experience: {
-    type: [experienceSchema],
-    default: [],
-  },
-  is_completed: {
-    type: Boolean,
-    default: false,
-  },
-  mobile_no: {
-    type: Number,
-  },
-});
+  { timestamps: true }
+);
 
 const StudentModel = mongoose.model("Student", studentSchema);
 
