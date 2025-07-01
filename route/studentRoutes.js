@@ -15,8 +15,10 @@ const {
   updateExperience,
   deleteExperience,
   getStudentDetails,
-  addGithubUrl,
-  addLinkedinUrl,
+  addSocialLinks,
+  addContactDeatils,
+  addResume,
+  updateProfileImage,
 } = require("../controller/studentController");
 
 const { verifyToken } = require("../utils/AuthUtils");
@@ -39,7 +41,9 @@ router.post("/addExperience", verifyToken, addExperience);
 router.put("/updateExperience/:id", verifyToken, updateExperience);
 router.delete("/deleteExperience/:id", verifyToken, deleteExperience);
 
-router.post("/addGithub", verifyToken, addGithubUrl);
-router.post("/addLinkedin", verifyToken, addLinkedinUrl);
+router.post("/updateProfileImage", verifyToken, updateProfileImage);
+router.post("/addContactDeatils", verifyToken, addContactDeatils);
+router.post("/addSocialLinks", verifyToken, addSocialLinks);
+router.post("/resume", verifyToken, addResume);
 
 module.exports = router;

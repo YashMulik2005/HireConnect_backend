@@ -9,8 +9,8 @@ const sucessResponse = (res, data, message = "data fetched successfully") => {
 const errorResponse = (res, error, message) => {
   return res.status(500).json({
     status: false,
-    message: message || "an error occurred",
-    error: error.message || "error",
+    message: error || "an error occurred",
+    error: error || "error",
   });
 };
 

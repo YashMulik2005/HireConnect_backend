@@ -4,6 +4,7 @@ const {
   sucessfullyCreatedResponse,
   errorResponse,
   notFoundResponse,
+  sucessResponse,
 } = require("../utils/responseUtils");
 
 const apply = async (req, res) => {
@@ -48,7 +49,6 @@ const apply = async (req, res) => {
       job_id,
       resume,
       cover_letter,
-      status: "Under review",
       skills,
       education,
       projects,
@@ -68,4 +68,33 @@ const apply = async (req, res) => {
   }
 };
 
-module.exports = { apply };
+const getUserApplications = async (req, res) => {
+  try {
+    const { status } = req.query;
+    const query = { student_id: req.user.id };
+    if (status) {
+      query.status = status;
+    }
+
+    const applications = await ApplicationsModel.find(query)
+      .select("job_id status createdAt")
+      .populate({
+        path: "job_id",
+        select: "title job_mode company",
+        populate: {
+          path: "company",
+          select: "name",
+        },
+      });
+
+    return sucessResponse(
+      res,
+      applications,
+      "Applications fetched successfully."
+    );
+  } catch (err) {
+    return errorResponse(res, err);
+  }
+};
+
+module.exports = { apply, getUserApplications };

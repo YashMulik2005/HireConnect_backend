@@ -26,71 +26,74 @@ const mongoose = require("mongoose");
 //   description: { type: String },
 // });
 
-const applicationsSchema = new mongoose.Schema({
-  student_id: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Student",
-    required: true,
+const applicationsSchema = new mongoose.Schema(
+  {
+    student_id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Student",
+      required: true,
+    },
+    job_id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Job",
+      required: true,
+    },
+    status: {
+      type: String,
+      enum: [
+        "Under Review",
+        "Shortlisted",
+        "Interview Scheduled",
+        "Selected",
+        "Rejected",
+      ],
+      required: true,
+      default: "Under Review",
+    },
+    resume: {
+      type: String,
+      required: true,
+    },
+    cover_letter: {
+      type: String,
+    },
+    skills: {
+      type: [String],
+      default: [],
+    },
+    education: {
+      type: [Object],
+      default: [],
+    },
+    projects: {
+      type: [Object],
+      default: [],
+    },
+    github_url: {
+      type: String,
+    },
+    linkedin_url: {
+      type: String,
+    },
+    experience: {
+      type: [Object],
+      default: [],
+    },
+    name: {
+      type: String,
+      required: true,
+    },
+    mail: {
+      type: String,
+      required: true,
+    },
+    mobile_no: {
+      type: String,
+      required: true,
+    },
   },
-  job_id: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Job",
-    required: true,
-  },
-  status: {
-    type: String,
-    enum: [
-      "Under Review",
-      "Shortlisted",
-      "Interview Scheduled",
-      "Selected",
-      "Rejected",
-    ],
-    required: true,
-    default: "Under Review",
-  },
-  resume: {
-    type: String,
-    required: true,
-  },
-  cover_letter: {
-    type: String,
-  },
-  skills: {
-    type: [String],
-    default: [],
-  },
-  education: {
-    type: [Object],
-    default: [],
-  },
-  projects: {
-    type: [Object],
-    default: [],
-  },
-  github_url: {
-    type: String,
-  },
-  linkedin_url: {
-    type: String,
-  },
-  experience: {
-    type: [Object],
-    default: [],
-  },
-  name: {
-    type: String,
-    required: true,
-  },
-  mail: {
-    type: String,
-    required: true,
-  },
-  mobile_no: {
-    type: String,
-    required: true,
-  },
-});
+  { timestamps: true }
+);
 
 const ApplicationsModel = mongoose.model("Applictions", applicationsSchema);
 

@@ -77,6 +77,9 @@ const studentSchema = new mongoose.Schema(
     mobile_no: {
       type: Number,
     },
+    profile_img: {
+      type: String,
+    },
   },
   { timestamps: true }
 );

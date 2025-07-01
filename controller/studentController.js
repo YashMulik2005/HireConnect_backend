@@ -346,40 +346,76 @@ const getStudentDetails = async (req, res) => {
   }
 };
 
-const addGithubUrl = async (req, res) => {
+const addSocialLinks = async (req, res) => {
   try {
-    const { github_url } = req.body;
+    const { github_url, linkedin_url } = req.body;
 
-    if (!github_url) return errorResponse(res, "link data is required.");
+    if (!github_url || !linkedin_url)
+      return errorResponse(res, "All links are is required.");
 
     const student = await studentModel.findById(req.user.id);
     if (!student) return notFoundResponse(res, "Student not found.");
 
     student.github_url = github_url;
+    student.linkedin_url = linkedin_url;
     await student.save();
 
-    return sucessResponse(res, student.github_url, "link added successfully.");
+    return sucessResponse(res, student, "links added successfully.");
   } catch (err) {
     return errorResponse(res, err.message);
   }
 };
 
-const addLinkedinUrl = async (req, res) => {
+const addContactDeatils = async (req, res) => {
   try {
-    const { linkedin_url } = req.body;
+    const { mail, mobile_no } = req.body;
 
-    if (!linkedin_url) return errorResponse(res, "link data is required.");
+    if (!mail || !mobile_no)
+      return errorResponse(res, "All fields are is required.");
 
     const student = await studentModel.findById(req.user.id);
     if (!student) return notFoundResponse(res, "Student not found.");
 
-    student.linkedin_url = linkedin_url;
+    student.mail = mail;
+    student.mobile_no = mobile_no;
+    await student.save();
+
+    return sucessResponse(res, student, "Contact deatils added successfully.");
+  } catch (err) {
+    return errorResponse(res, err.message);
+  }
+};
+
+const addResume = async (req, res) => {
+  try {
+    const { resume } = req.body;
+
+    const student = await studentModel.findById(req.user.id);
+    if (!student) return notFoundResponse(res, "Student not found.");
+
+    student.resume = resume;
+    await student.save();
+
+    return sucessResponse(res, student.resume, "resume uploaded successfully.");
+  } catch (err) {
+    return errorResponse(res, err.message);
+  }
+};
+
+const updateProfileImage = async (req, res) => {
+  try {
+    const { profile_img } = req.body;
+
+    const student = await studentModel.findById(req.user.id);
+    if (!student) return notFoundResponse(res, "Student not found.");
+
+    student.profile_img = profile_img;
     await student.save();
 
     return sucessResponse(
       res,
-      student.linkedin_url,
-      "link added successfully."
+      student.profile_img,
+      "Profile image uploaded successfully."
     );
   } catch (err) {
     return errorResponse(res, err.message);
@@ -400,6 +436,8 @@ module.exports = {
   updateExperience,
   deleteExperience,
   getStudentDetails,
-  addGithubUrl,
-  addLinkedinUrl,
+  addSocialLinks,
+  addContactDeatils,
+  addResume,
+  updateProfileImage,
 };
