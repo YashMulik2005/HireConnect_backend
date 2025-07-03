@@ -229,10 +229,36 @@ Now, generate the following 4 analytics in JSON format:
   }
 };
 
+const getJobsByCompany = async (req, res) => {
+  try {
+    const jobs = await JobModel.find({ company: req.user.id }).select(
+      "title description reg_date category createdAt"
+    );
+
+    return sucessResponse(res, jobs, "Job fetched successfully");
+  } catch (err) {
+    return errorResponse(res, err);
+  }
+};
+
+const getOneJobForCompany = async (req, res) => {
+  try {
+    const { job_id } = req.params;
+    const jobs = await JobModel.findById(job_id).select(
+      "title description reg_date category createdAt"
+    );
+    return sucessResponse(res, jobs, "Job fetched successfully");
+  } catch (err) {
+    return errorResponse(res, err);
+  }
+};
+
 module.exports = {
   createJob,
   updateJob,
   getJobs,
   getJobsById,
   getJobAnalytics,
+  getJobsByCompany,
+  getOneJobForCompany,
 };

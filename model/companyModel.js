@@ -29,6 +29,18 @@ const companyScheam = new mongoose.Schema({
   logo_url: {
     type: String,
   },
+  about: {
+    type: String,
+  },
+  office_location: {
+    type: [String],
+  },
+  employees: {
+    type: Number,
+  },
+  images: {
+    type: [String],
+  },
 });
 
 const CompanyModel = mongoose.model("Company", companyScheam);

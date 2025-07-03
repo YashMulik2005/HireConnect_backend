@@ -6,6 +6,7 @@ const {
   notFoundResponse,
   sucessResponse,
 } = require("../utils/responseUtils");
+const sendmail = require("../utils/mailUtils");
 
 const apply = async (req, res) => {
   try {
@@ -97,4 +98,80 @@ const getUserApplications = async (req, res) => {
   }
 };
 
-module.exports = { apply, getUserApplications };
+const getApplicationsByJob = async (req, res) => {
+  try {
+    const { job_id } = req.params;
+
+    const applications = await ApplicationsModel.find({
+      job_id: job_id,
+    }).select("name resume status linkedin_url github_url mail");
+
+    return sucessResponse(
+      res,
+      applications,
+      "Applications fetched successfully."
+    );
+  } catch (err) {
+    return errorResponse(res, err);
+  }
+};
+
+const getSingleApplication = async (req, res) => {
+  try {
+    const { application_id } = req.params;
+    const applications = await ApplicationsModel.findById(application_id);
+
+    return sucessResponse(
+      res,
+      applications,
+      "Application fetched successfully."
+    );
+  } catch (err) {
+    return errorResponse(res, err);
+  }
+};
+
+const changeApplicationStatus = async (req, res) => {
+  try {
+    const { status } = req.body;
+    const { application_id } = req.params;
+
+    const application = await ApplicationsModel.findById(application_id);
+
+    if (!application) return notFoundResponse(res, "Application not found.");
+
+    application.status = status;
+    await application.save();
+
+    return sucessResponse(
+      res,
+      application.status,
+      "Status updated successfully"
+    );
+  } catch (err) {
+    return errorResponse(res, err);
+  }
+};
+
+const sendTestmail = async (req, res) => {
+  try {
+    const { receivermail } = req.body;
+    console.log("uvefve", receivermail);
+
+    sendmail(receivermail);
+
+    return sucessResponse(res, receivermail, "mail send successfully.");
+  } catch (err) {
+    console.log(err);
+    return errorResponse(res, err);
+  }
+};
+
+module.exports = {
+  apply,
+  getUserApplications,
+  getApplicationsByJob,
+  getSingleApplication,
+  changeApplicationStatus,
+  sendTestmail,
+};

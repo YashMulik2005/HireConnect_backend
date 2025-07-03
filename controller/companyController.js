@@ -48,7 +48,7 @@ const login = async (req, res) => {
     let company = await CompanyModel.findOne({ mail });
 
     if (!company) {
-      return notFoundResponse(res, "User not found.");
+      return notFoundResponse(res, "Company not found.");
     }
 
     const isMatch = await bcrypt.compare(password, company.password);
