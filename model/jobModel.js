@@ -61,6 +61,16 @@ const jobSchema = new mongoose.Schema(
       type: [String],
       required: true,
     },
+    task: {
+      type: String,
+    },
+    submissionForm: {
+      type: Object,
+    },
+    taskSubmitted: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true }
 );

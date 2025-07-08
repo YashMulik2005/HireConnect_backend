@@ -149,6 +149,28 @@ const updateLogo = async (req, res) => {
   }
 };
 
+const updateOfficeLocation = async (req, res) => {
+  try {
+    const { office_location } = req.body;
+
+    const company = await CompanyModel.findById(req.user.id);
+    if (!company) {
+      return notFoundResponse(res, "Company not found.");
+    }
+
+    company.office_location = office_location;
+    await company.save();
+
+    return sucessResponse(
+      res,
+      company,
+      "Office location updated successfully."
+    );
+  } catch (err) {
+    return errorResponse(res, err);
+  }
+};
+
 module.exports = {
   login,
   signUp,
@@ -156,4 +178,5 @@ module.exports = {
   updateProfile,
   updateStatus,
   updateLogo,
+  updateOfficeLocation,
 };

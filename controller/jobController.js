@@ -30,6 +30,8 @@ const createJob = async (req, res) => {
       perks,
       numberOfOpenings,
       responsibilities,
+      task,
+      submissionForm,
     } = req.body;
 
     const companyId = req.user.id;
@@ -42,13 +44,15 @@ const createJob = async (req, res) => {
       job_type,
       address,
       company: companyId,
-      reg_date: reg_date,
+      reg_date,
       category,
       salary,
       job_mode,
       perks,
       numberOfOpenings,
       responsibilities,
+      task,
+      submissionForm,
     });
 
     await newJob.save();
